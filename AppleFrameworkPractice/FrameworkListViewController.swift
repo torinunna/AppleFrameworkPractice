@@ -18,6 +18,12 @@ class FrameworkListViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        
+        if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.estimatedItemSize = .zero
+        }
+        
+        collectionView.contentInset = UIEdgeInsets(top: 20.0, left: 12.0, bottom: 5.0, right: 12.0)
     }
   
 }
@@ -38,7 +44,8 @@ extension FrameworkListViewController: UICollectionViewDataSource {
 extension FrameworkListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let interItemSpacing: CGFloat = 10.0
-        let width = (collectionView.bounds.width - interItemSpacing * 2) / 3
+        let padding: CGFloat = 12.0
+        let width = (collectionView.bounds.width - interItemSpacing * 2 - padding * 2) / 3
         let height = width * 1.5
         return CGSize(width: width, height: height)
     }
