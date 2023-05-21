@@ -12,6 +12,7 @@
 		86106E832A19E35D00E14BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86106E812A19E35D00E14BB9 /* Main.storyboard */; };
 		86106E852A19E35E00E14BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 86106E842A19E35E00E14BB9 /* Assets.xcassets */; };
 		86106E882A19E35E00E14BB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86106E862A19E35E00E14BB9 /* LaunchScreen.storyboard */; };
+		86106E902A19EC5700E14BB9 /* FrameworkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86106E8F2A19EC5700E14BB9 /* FrameworkListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		86106E842A19E35E00E14BB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		86106E872A19E35E00E14BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		86106E892A19E35E00E14BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		86106E8F2A19EC5700E14BB9 /* FrameworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameworkListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				86106E7B2A19E35D00E14BB9 /* AppDelegate.swift */,
 				86106E7D2A19E35D00E14BB9 /* SceneDelegate.swift */,
 				86106E812A19E35D00E14BB9 /* Main.storyboard */,
+				86106E8F2A19EC5700E14BB9 /* FrameworkListViewController.swift */,
 				86106E842A19E35E00E14BB9 /* Assets.xcassets */,
 				86106E862A19E35E00E14BB9 /* LaunchScreen.storyboard */,
 				86106E892A19E35E00E14BB9 /* Info.plist */,
@@ -137,6 +140,7 @@
 			files = (
 				86106E7C2A19E35D00E14BB9 /* AppDelegate.swift in Sources */,
 				86106E7E2A19E35D00E14BB9 /* SceneDelegate.swift in Sources */,
+				86106E902A19EC5700E14BB9 /* FrameworkListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
