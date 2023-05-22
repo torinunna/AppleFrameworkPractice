@@ -37,6 +37,8 @@ class FrameworkListViewController: UIViewController {
         datasource.apply(snapshot)
         
         collectionView.collectionViewLayout = layout()
+        
+        collectionView.delegate = self
     }
     
     // compositional layout -> layout
@@ -49,5 +51,15 @@ class FrameworkListViewController: UIViewController {
         section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 16.0, bottom: 0, trailing: 16.0)
         let layout = UICollectionViewCompositionalLayout(section: section)
         return layout
+    }
+}
+
+extension FrameworkListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let framework = list[indexPath.item]
+        let storyboard = UIStoryboard(name: "Detail", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: "FrameworkDetailViewController") as! FrameworkDetailViewController
+        vc.framework = framework
+        present(vc, animated: true)
     }
 }
