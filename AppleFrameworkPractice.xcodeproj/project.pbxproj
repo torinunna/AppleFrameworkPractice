@@ -15,6 +15,8 @@
 		86106E902A19EC5700E14BB9 /* FrameworkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86106E8F2A19EC5700E14BB9 /* FrameworkListViewController.swift */; };
 		86106E922A19EC9700E14BB9 /* FrameworkData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86106E912A19EC9700E14BB9 /* FrameworkData.swift */; };
 		86106E942A19F35600E14BB9 /* FrameworkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86106E932A19F35600E14BB9 /* FrameworkCell.swift */; };
+		86106E962A1B522D00E14BB9 /* Detail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86106E952A1B522D00E14BB9 /* Detail.storyboard */; };
+		86106E982A1B524500E14BB9 /* FrameworkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86106E972A1B524500E14BB9 /* FrameworkDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		86106E8F2A19EC5700E14BB9 /* FrameworkListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameworkListViewController.swift; sourceTree = "<group>"; };
 		86106E912A19EC9700E14BB9 /* FrameworkData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameworkData.swift; sourceTree = "<group>"; };
 		86106E932A19F35600E14BB9 /* FrameworkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameworkCell.swift; sourceTree = "<group>"; };
+		86106E952A1B522D00E14BB9 /* Detail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Detail.storyboard; sourceTree = "<group>"; };
+		86106E972A1B524500E14BB9 /* FrameworkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameworkDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +69,9 @@
 				86106E912A19EC9700E14BB9 /* FrameworkData.swift */,
 				86106E8F2A19EC5700E14BB9 /* FrameworkListViewController.swift */,
 				86106E932A19F35600E14BB9 /* FrameworkCell.swift */,
+				86106E972A1B524500E14BB9 /* FrameworkDetailViewController.swift */,
 				86106E812A19E35D00E14BB9 /* Main.storyboard */,
+				86106E952A1B522D00E14BB9 /* Detail.storyboard */,
 				86106E842A19E35E00E14BB9 /* Assets.xcassets */,
 				86106E862A19E35E00E14BB9 /* LaunchScreen.storyboard */,
 				86106E892A19E35E00E14BB9 /* Info.plist */,
@@ -134,6 +140,7 @@
 				86106E882A19E35E00E14BB9 /* LaunchScreen.storyboard in Resources */,
 				86106E852A19E35E00E14BB9 /* Assets.xcassets in Resources */,
 				86106E832A19E35D00E14BB9 /* Main.storyboard in Resources */,
+				86106E962A1B522D00E14BB9 /* Detail.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +155,7 @@
 				86106E7E2A19E35D00E14BB9 /* SceneDelegate.swift in Sources */,
 				86106E922A19EC9700E14BB9 /* FrameworkData.swift in Sources */,
 				86106E942A19F35600E14BB9 /* FrameworkCell.swift in Sources */,
+				86106E982A1B524500E14BB9 /* FrameworkDetailViewController.swift in Sources */,
 				86106E902A19EC5700E14BB9 /* FrameworkListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
