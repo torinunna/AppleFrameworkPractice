@@ -7,6 +7,7 @@
 
 import UIKit
 import SafariServices
+import Combine
 
 class FrameworkDetailViewController: UIViewController {
     
