@@ -11,27 +11,43 @@ import Combine
 
 class FrameworkDetailViewController: UIViewController {
     
-    var framework: AppleFramework = AppleFramework(name: "Unknown", imageName: "", urlString: "", description: "")
-
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    //    Combine
+    var subscriptions = Set<AnyCancellable>()
+    let didSelect = PassthroughSubject<AppleFramework, Never>()
+    let framework = CurrentValueSubject<AppleFramework, Never>(AppleFramework(name: "Unknown", imageName: "", urlString: "", description: ""))
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
+        bind()
     }
     
-    func updateUI() {
-        thumbnailImage.image = UIImage(named: framework.imageName)
-        titleLabel.text = framework.name
-        descriptionLabel.text = framework.description
-    }
- 
-    @IBAction func LearnMoreBtnPressed(_ sender: Any) {
-        guard let url = URL(string: framework.urlString) else { return }
+    private func bind() {
+        //        input
+        //        framework -> url -> safari
+        didSelect
+            .receive(on: RunLoop.main)
+            .compactMap { URL(string: $0.urlString) }
+            .sink { [unowned self] url in
+                let safari = SFSafariViewController(url: url)
+                self.present(safari, animated: true)
+            }.store(in: &subscriptions)
         
-        let safari = SFSafariViewController(url: url)
-        present(safari, animated: true)
+        //        output
+        framework
+            .receive(on: RunLoop.main)
+            .sink { [unowned self] framework in
+                self.thumbnailImage.image = UIImage(named: framework.imageName)
+                self.titleLabel.text = framework.name
+                self.descriptionLabel.text = framework.description
+            }.store(in: &subscriptions)
+    }
+    
+    @IBAction func LearnMoreBtnPressed(_ sender: Any) {
+        didSelect.send(framework.value)
     }
 }
+
