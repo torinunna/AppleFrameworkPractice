@@ -10,7 +10,7 @@ import Combine
 
 class FrameworkListViewController: UIViewController {
     
-    let list: [AppleFramework] = AppleFramework.list
+    @IBOutlet weak var collectionView: UICollectionView!
     
     // UICollectionViewDiffableDataSource -> presentation
     enum Section {
@@ -20,25 +20,51 @@ class FrameworkListViewController: UIViewController {
     
     var datasource: UICollectionViewDiffableDataSource<Section, Item>!
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    //    Combine
+    var subscriptions = Set<AnyCancellable>()
+    let didSelect = PassthroughSubject<AppleFramework, Never>()
+    let items = CurrentValueSubject<[AppleFramework], Never>(AppleFramework.list)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureCollectionView()
+        bind()
+    }
+    
+    private func bind() {
+        //        input
+        didSelect
+            .receive(on: RunLoop.main)
+            .sink { [unowned self] framework in
+                let storyboard = UIStoryboard(name: "Detail", bundle: nil)
+                let vc = storyboard.instantiateViewController(withIdentifier: "FrameworkDetailViewController") as! FrameworkDetailViewController
+                vc.framework = framework
+                self.present(vc, animated: true)
+            }.store(in: &subscriptions)
         
+        //        ouptut
+        items
+            .receive(on: RunLoop.main)
+            .sink { [unowned self] list in
+                applySectionItems(list)
+            }.store(in: &subscriptions)
+    }
+    
+    private func applySectionItems(_ items: [Item], to section: Section = .main) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
+        snapshot.appendSections([section])
+        snapshot.appendItems(items, toSection: section)
+        datasource.apply(snapshot)
+    }
+    
+    private func configureCollectionView() {
         datasource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView, cellProvider: { collectionView, indexPath, item in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FrameworkCell.identifier, for: indexPath) as? FrameworkCell else { return nil }
             cell.configure(item)
             return cell
         })
         
-        // snapshot -> data
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(list, toSection: .main)
-        datasource.apply(snapshot)
-        
         collectionView.collectionViewLayout = layout()
-        
         collectionView.delegate = self
     }
     
@@ -57,10 +83,7 @@ class FrameworkListViewController: UIViewController {
 
 extension FrameworkListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let framework = list[indexPath.item]
-        let storyboard = UIStoryboard(name: "Detail", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "FrameworkDetailViewController") as! FrameworkDetailViewController
-        vc.framework = framework
-        present(vc, animated: true)
+        let framework = items.value[indexPath.item]
+        didSelect.send(framework)
     }
 }
