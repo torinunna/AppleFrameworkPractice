@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		86097C832A2CD66300D47779 /* FrameworkListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86097C822A2CD66300D47779 /* FrameworkListViewModel.swift */; };
+		86097C852A2CD66C00D47779 /* FrameworkDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86097C842A2CD66C00D47779 /* FrameworkDetailViewModel.swift */; };
 		86106E7C2A19E35D00E14BB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86106E7B2A19E35D00E14BB9 /* AppDelegate.swift */; };
 		86106E7E2A19E35D00E14BB9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86106E7D2A19E35D00E14BB9 /* SceneDelegate.swift */; };
 		86106E832A19E35D00E14BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 86106E812A19E35D00E14BB9 /* Main.storyboard */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		86097C822A2CD66300D47779 /* FrameworkListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameworkListViewModel.swift; sourceTree = "<group>"; };
+		86097C842A2CD66C00D47779 /* FrameworkDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameworkDetailViewModel.swift; sourceTree = "<group>"; };
 		86106E782A19E35D00E14BB9 /* AppleFrameworkPractice.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppleFrameworkPractice.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		86106E7B2A19E35D00E14BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		86106E7D2A19E35D00E14BB9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -45,6 +49,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		86097C802A2CD64600D47779 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				86106E912A19EC9700E14BB9 /* FrameworkData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		86097C812A2CD65500D47779 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				86106E8F2A19EC5700E14BB9 /* FrameworkListViewController.swift */,
+				86106E932A19F35600E14BB9 /* FrameworkCell.swift */,
+				86106E972A1B524500E14BB9 /* FrameworkDetailViewController.swift */,
+				86106E812A19E35D00E14BB9 /* Main.storyboard */,
+				86106E952A1B522D00E14BB9 /* Detail.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		86097C862A2CD67100D47779 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				86097C822A2CD66300D47779 /* FrameworkListViewModel.swift */,
+				86097C842A2CD66C00D47779 /* FrameworkDetailViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		86106E6F2A19E35D00E14BB9 = {
 			isa = PBXGroup;
 			children = (
@@ -66,12 +99,9 @@
 			children = (
 				86106E7B2A19E35D00E14BB9 /* AppDelegate.swift */,
 				86106E7D2A19E35D00E14BB9 /* SceneDelegate.swift */,
-				86106E912A19EC9700E14BB9 /* FrameworkData.swift */,
-				86106E8F2A19EC5700E14BB9 /* FrameworkListViewController.swift */,
-				86106E932A19F35600E14BB9 /* FrameworkCell.swift */,
-				86106E972A1B524500E14BB9 /* FrameworkDetailViewController.swift */,
-				86106E812A19E35D00E14BB9 /* Main.storyboard */,
-				86106E952A1B522D00E14BB9 /* Detail.storyboard */,
+				86097C862A2CD67100D47779 /* ViewModel */,
+				86097C802A2CD64600D47779 /* Model */,
+				86097C812A2CD65500D47779 /* View */,
 				86106E842A19E35E00E14BB9 /* Assets.xcassets */,
 				86106E862A19E35E00E14BB9 /* LaunchScreen.storyboard */,
 				86106E892A19E35E00E14BB9 /* Info.plist */,
@@ -153,9 +183,11 @@
 			files = (
 				86106E7C2A19E35D00E14BB9 /* AppDelegate.swift in Sources */,
 				86106E7E2A19E35D00E14BB9 /* SceneDelegate.swift in Sources */,
+				86097C832A2CD66300D47779 /* FrameworkListViewModel.swift in Sources */,
 				86106E922A19EC9700E14BB9 /* FrameworkData.swift in Sources */,
 				86106E942A19F35600E14BB9 /* FrameworkCell.swift in Sources */,
 				86106E982A1B524500E14BB9 /* FrameworkDetailViewController.swift in Sources */,
+				86097C852A2CD66C00D47779 /* FrameworkDetailViewModel.swift in Sources */,
 				86106E902A19EC5700E14BB9 /* FrameworkListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
