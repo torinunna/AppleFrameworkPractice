@@ -12,7 +12,6 @@ class FrameworkListViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    // UICollectionViewDiffableDataSource -> presentation
     enum Section {
         case main
     }
@@ -20,33 +19,31 @@ class FrameworkListViewController: UIViewController {
     
     var datasource: UICollectionViewDiffableDataSource<Section, Item>!
     
-    //    Combine
     var subscriptions = Set<AnyCancellable>()
-    let didSelect = PassthroughSubject<AppleFramework, Never>()
-    let items = CurrentValueSubject<[AppleFramework], Never>(AppleFramework.list)
+    var viewModel: FrameworkListViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel = FrameworkListViewModel(itmes: AppleFramework.list)
         configureCollectionView()
         bind()
     }
     
     private func bind() {
-        //        input
-        didSelect
-            .receive(on: RunLoop.main)
-            .sink { [unowned self] framework in
-                let storyboard = UIStoryboard(name: "Detail", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "FrameworkDetailViewController") as! FrameworkDetailViewController
-                vc.framework.send(framework)
-                self.present(vc, animated: true)
-            }.store(in: &subscriptions)
-        
-        //        ouptut
-        items
+        viewModel.items
             .receive(on: RunLoop.main)
             .sink { [unowned self] list in
-                applySectionItems(list)
+                self.applySectionItems(list)
+            }.store(in: &subscriptions)
+        
+        viewModel.selectedItem
+            .compactMap { $0 }
+            .receive(on: RunLoop.main)
+            .sink { framework in
+                let sb = UIStoryboard(name: "Detail", bundle: nil)
+                let vc = sb.instantiateViewController(withIdentifier: "FrameworkDetailViewController") as! FrameworkDetailViewController
+                vc.framework.send(framework)
+                self.present(vc, animated: true)
             }.store(in: &subscriptions)
     }
     
@@ -68,7 +65,6 @@ class FrameworkListViewController: UIViewController {
         collectionView.delegate = self
     }
     
-    // compositional layout -> layout
     private func layout() -> UICollectionViewCompositionalLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.33), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -83,7 +79,6 @@ class FrameworkListViewController: UIViewController {
 
 extension FrameworkListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let framework = items.value[indexPath.item]
-        didSelect.send(framework)
+        viewModel.didSelect(at: indexPath)
     }
 }
