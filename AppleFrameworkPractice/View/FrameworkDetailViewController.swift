@@ -15,10 +15,8 @@ class FrameworkDetailViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    //    Combine
     var subscriptions = Set<AnyCancellable>()
-    let didSelect = PassthroughSubject<AppleFramework, Never>()
-    let framework = CurrentValueSubject<AppleFramework, Never>(AppleFramework(name: "Unknown", imageName: "", urlString: "", description: ""))
+    var viewModel: FrameworkDetailViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +24,7 @@ class FrameworkDetailViewController: UIViewController {
     }
     
     private func bind() {
-        //        input
-        //        framework -> url -> safari
-        didSelect
+        viewModel.didSelect
             .receive(on: RunLoop.main)
             .compactMap { URL(string: $0.urlString) }
             .sink { [unowned self] url in
@@ -36,8 +32,7 @@ class FrameworkDetailViewController: UIViewController {
                 self.present(safari, animated: true)
             }.store(in: &subscriptions)
         
-        //        output
-        framework
+        viewModel.framework
             .receive(on: RunLoop.main)
             .sink { [unowned self] framework in
                 self.thumbnailImage.image = UIImage(named: framework.imageName)
@@ -47,7 +42,7 @@ class FrameworkDetailViewController: UIViewController {
     }
     
     @IBAction func LearnMoreBtnPressed(_ sender: Any) {
-        didSelect.send(framework.value)
+        viewModel.LearnMoreBtnPressed()
     }
 }
 
