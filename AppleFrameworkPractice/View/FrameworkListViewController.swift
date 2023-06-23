@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import SwiftUI
 
 class FrameworkListViewController: UIViewController {
     
@@ -40,10 +41,10 @@ class FrameworkListViewController: UIViewController {
             .compactMap { $0 }
             .receive(on: RunLoop.main)
             .sink { framework in
-                let sb = UIStoryboard(name: "Detail", bundle: nil)
-                let vc = sb.instantiateViewController(withIdentifier: "FrameworkDetailViewController") as! FrameworkDetailViewController
-                vc.viewModel = FrameworkDetailViewModel(framework: framework)
-                self.present(vc, animated: true)
+                let detailViewModel = FrameworkDetailViewModelSwiftUI (framework: framework)
+                let detailView = FrameworkDetailView(viewModel: detailViewModel)
+                let hostingController = UIHostingController(rootView: detailView)
+                self.present(hostingController, animated: true)
             }.store(in: &subscriptions)
     }
     
